@@ -125,6 +125,11 @@ function Header(props) {
           </div>
           <div className="flex items-center gap-2">
             {!props.isAdmin && (
+              <a href="dashboard_situation.html" className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs border border-white/20 hover:bg-white/10 no-underline text-white">
+                📊 <span className="hidden md:inline">สถานการณ์</span>
+              </a>
+            )}
+            {!props.isAdmin && (
               <button onClick={function() { props.setPage("dashboard"); }} className={"flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs border border-white/20 " + (props.page === "dashboard" ? "bg-white/20" : "hover:bg-white/10")}>
                 <BarChart3 size={14} />
                 <span className="hidden md:inline">สรุปข้อมูล</span>
