@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ระบบแจ้งความคืบหน้าคดีอาญา - สภ.เสลภูมิ</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link rel="icon" href="data:image/jpeg;base64,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">
+<style>
+* { font-family: 'Sarabun', 'Noto Sans Thai', sans-serif; }
+body { margin: 0; background: #faf5ef; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+// Lucide icons as inline SVG components
+function LucideIcon({d, size=24, className=""}) {
+  return React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg", width: size, height: size,
+    viewBox: "0 0 24 24", fill: "none", stroke: "currentColor",
+    strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round",
+    className: className
+  }, React.createElement("path", {d: d}));
+}
+function Search(p) { return LucideIcon({...p, d:"M21 21l-4.35-4.35M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"}); }
+function Shield(p) { return LucideIcon({...p, d:"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"}); }
+function FileText(p) { return React.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:p.size||24,height:p.size||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:p.className||""},React.createElement("path",{d:"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"}),React.createElement("path",{d:"M14 2v6h6"}),React.createElement("path",{d:"M16 13H8"}),React.createElement("path",{d:"M16 17H8"}),React.createElement("path",{d:"M10 9H8"})); }
+function Clock(p) { return React.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:p.size||24,height:p.size||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:p.className||"",style:p.style},React.createElement("circle",{cx:12,cy:12,r:10}),React.createElement("path",{d:"M12 6v6l4 2"})); }
+function CheckCircle(p) { return React.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:p.size||24,height:p.size||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:p.className||""},React.createElement("path",{d:"M22 11.08V12a10 10 0 1 1-5.93-9.14"}),React.createElement("path",{d:"M22 4L12 14.01l-3-3"})); }
+function LogIn(p) { return React.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:p.size||24,height:p.size||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:p.className||""},React.createElement("path",{d:"M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"}),React.createElement("path",{d:"M10 17l5-5-5-5"}),React.createElement("path",{d:"M15 12H3"})); }
+function LogOut(p) { return React.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:p.size||24,height:p.size||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:p.className||""},React.createElement("path",{d:"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"}),React.createElement("path",{d:"M16 17l5-5-5-5"}),React.createElement("path",{d:"M21 12H9"})); }
+function Plus(p) { return LucideIcon({...p, d:"M12 5v14M5 12h14"}); }
+function Edit(p) { return LucideIcon({...p, d:"M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"}); }
+function Trash2(p) { return React.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:p.size||24,height:p.size||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:p.className||""},React.createElement("path",{d:"M3 6h18"}),React.createElement("path",{d:"M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"}),React.createElement("path",{d:"M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"})); }
+function Eye(p) { return LucideIcon({...p, d:"M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"}); }
+function EyeOff(p) { return LucideIcon({...p, d:"M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24M1 1l22 22"}); }
+function Phone(p) { return LucideIcon({...p, d:"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"}); }
+function ArrowLeft(p) { return LucideIcon({...p, d:"M19 12H5M12 19l-7-7 7-7"}); }
+function X(p) { return LucideIcon({...p, d:"M18 6L6 18M6 6l12 12"}); }
+function Save(p) { return React.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:p.size||24,height:p.size||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:p.className||""},React.createElement("path",{d:"M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"}),React.createElement("path",{d:"M17 21v-8H7v8"}),React.createElement("path",{d:"M7 3v5h8"})); }
+function Bell(p) { return React.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:p.size||24,height:p.size||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:p.className||""},React.createElement("path",{d:"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"}),React.createElement("path",{d:"M13.73 21a2 2 0 0 1-3.46 0"})); }
+function BarChart3(p) { return React.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:p.size||24,height:p.size||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:p.className||""},React.createElement("path",{d:"M18 20V10"}),React.createElement("path",{d:"M12 20V4"}),React.createElement("path",{d:"M6 20v-6"})); }
+function Users(p) { return LucideIcon({...p, d:"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"}); }
+function ChevronDown(p) { return LucideIcon({...p, d:"M6 9l6 6 6-6"}); }
+function ChevronRight(p) { return LucideIcon({...p, d:"M9 18l6-6-6-6"}); }
+function Printer(p) { return React.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:p.size||24,height:p.size||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:p.className||""},React.createElement("path",{d:"M6 9V2h12v7"}),React.createElement("path",{d:"M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"}),React.createElement("path",{d:"M6 14h12v8H6z"})); }
+function Award(p) { return React.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:p.size||24,height:p.size||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round",className:p.className||""},React.createElement("circle",{cx:12,cy:8,r:7}),React.createElement("path",{d:"M8.21 13.89L7 23l5-3 5 3-1.21-9.12"})); }
+
+
+var LOGO_B64 = "data:image/jpeg;base64,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";
+
+var ST = {
+  full: "สภ.เสลภูมิ ภ.จว.ร้อยเอ็ด ภ.4",
+  name: "สถานีตำรวจภูธรเสลภูมิ",
+  cmdr: "พ.ต.อ. อลงกรณ์ ชุ่มวงษ์",
+  cmdPos: "ผกก.สภ.เสลภูมิ จว.ร้อยเอ็ด",
+  cmdPh: "0870000230",
+  fy: "2569"
+};
+
+var CLR = {
+  pri: "#7B1818",
+  priDk: "#5A1010",
+  priLt: "#9B2C2C",
+  gold: "#C49A2A",
+  goldLt: "#E6B84D",
+  bg: "linear-gradient(135deg, #5A1010, #7B1818, #8B2020)",
+  btn: "linear-gradient(135deg, #7B1818, #B83232)"
+};
+
+var initCases = [
+  { id: "c1", cn: "524/2568", pjw: 2, rd: "2025-11-02", off: "ร่วมกัน ลักทรัพย์ในเวลากลางคืน", vt: "นาย", vn: "หยาด ศิริโสม", sus: "ผู้ต้องหา 3 คน (ผู้ต้องหาที่ 3 นายทนงศักดิ์ ศรีสงคราม หลบหนี)", ir: "ร.ต.อ.", inv: "นที ทศวัฒน์", ip: "0806119652", ipo: "รอง สว.(สอบสวน) สภ.เสลภูมิ", st: "สั่งฟ้อง" },
+  { id: "c2", cn: "539/2568", pjw: 3, rd: "2025-08-15", off: "ลักทรัพย์ที่เป็นของผู้มีอาชีพกสิกรรม", vt: "น.ส.", vn: "อุไรวรรณ โคตุเคน", sus: "พลทหารอภิสิทธิ์ บุญทาวรรณ", ir: "ร.ต.อ.", inv: "เดวิเจียง ลีคำโหมง", ip: "0872280811", ipo: "รอง สว.(สอบสวน) สภ.เสลภูมิ", st: "สั่งฟ้อง" },
+  { id: "c3", cn: "540/2568", pjw: 2, rd: "2025-11-13", off: "กระทำโดยประมาท", vt: "น.ส.", vn: "สมควร ประเสริฐสังข์", sus: "ด.ช.โชคศิริยศ หลาบคำ", ir: "ร.ต.อ.", inv: "วิเวช เกาะอำไพ", ip: "0801830012", ipo: "รอง สว.(สอบสวน) สภ.เสลภูมิ", st: "สั่งฟ้อง" },
+  { id: "c4", cn: "592/2568", pjw: 2, rd: "2025-12-18", off: "ทำร้ายร่างกายจนเป็นเหตุให้รับอันตรายสาหัส", vt: "นาย", vn: "ประวัติ มาศวรรณา", sus: "นายพงษ์ศักดิ์ หรือสาม ค้อชากุล", ir: "ร.ต.อ.", inv: "วิเวช เกาะอำไพ", ip: "0801830012", ipo: "รอง สว.(สอบสวน) สภ.เสลภูมิ", st: "สั่งฟ้อง" },
+  { id: "c5", cn: "593/2568", pjw: 1, rd: "2025-12-18", off: "ลักทรัพย์", vt: "นาย", vn: "วันชัย นาเมืองรักษ์", sus: "นายวรวุฒิ อรวร", ir: "ร.ต.อ.", inv: "นที ทศวัฒน์", ip: "0806119652", ipo: "รอง สว.(สอบสวน) สภ.เสลภูมิ", st: "สั่งฟ้อง" },
+  { id: "c6", cn: "35/2569", pjw: 3, rd: "2026-01-27", off: "ทำร้ายร่างกายผู้อื่น จนเป็นเหตุให้เกิดอันตรายแก่กายหรือจิตใจ", vt: "นาง", vn: "สุดารัตน์ ร่มศรี", sus: "นาย ธงชัย แสงวุธ", ir: "ร.ต.อ.", inv: "เดวิเจียง ลีคำโหมง", ip: "0872280811", ipo: "รอง สว.(สอบสวน) สภ.เสลภูมิ", st: "สั่งฟ้อง" },
+  { id: "c7", cn: "77/2569", pjw: 2, rd: "2026-02-24", off: "หมิ่นประมาท", vt: "นาง", vn: "สุภาพร สุทธิประภา", sus: "น.ส.น้ำฝน ปัญญา", ir: "ร.ต.อ.", inv: "นที ทศวัฒน์", ip: "0806119652", ipo: "รอง สว.(สอบสวน) สภ.เสลภูมิ", st: "สั่งฟ้อง" }
+];
+
+var initNotifs = [
+  { id: "n01", cid: "c1", tp: "30 วัน", dt: "2025-12-01", mt: "เว็บไซต์", rs: "อยู่ระหว่างรวบรวมพยานหลักฐาน สอบปากคำผู้เสียหายและพยาน ตรวจสอบกล้องวงจรปิด", nx: "ออกหมายเรียกผู้ต้องหา", rf: "" },
+  { id: "n02", cid: "c1", tp: "60 วัน", dt: "2025-12-30", mt: "เว็บไซต์", rs: "ออกหมายเรียกผู้ต้องหาทั้ง 3 คน ผู้ต้องหาที่ 1 และ 2 มารับทราบข้อกล่าวหา ผู้ต้องหาที่ 3 ไม่มาตามหมายเรียก", nx: "ขอออกหมายจับผู้ต้องหาที่ 3", rf: "" },
+  { id: "n03", cid: "c1", tp: "สรุปสำนวน", dt: "2026-01-22", mt: "หนังสือ", rs: "สั่งฟ้องผู้ต้องหาทั้ง 3 คน ผู้ต้องหาที่ 3 หลบหนี ออกหมายจับไว้แล้ว ส่งสำนวนไปอัยการฯ", nx: "ติดตามจับกุมผู้ต้องหาที่ 3", rf: "" },
+  { id: "n04", cid: "c2", tp: "30 วัน", dt: "2025-09-14", mt: "เว็บไซต์", rs: "สอบปากคำผู้เสียหายและพยานแล้ว อยู่ระหว่างตรวจสอบกล้องวงจรปิด", nx: "ตรวจสอบประวัติผู้ต้องสงสัย", rf: "" },
+  { id: "n05", cid: "c2", tp: "60 วัน", dt: "2025-10-14", mt: "เว็บไซต์", rs: "ระบุตัวผู้ต้องหาได้ คือ พลทหารอภิสิทธิ์ บุญทาวรรณ ออกหมายเรียกมาสอบสวน", nx: "ประสานอัยการศาลทหาร มทบ.27", rf: "" },
+  { id: "n06", cid: "c2", tp: "สรุปสำนวน", dt: "2026-02-02", mt: "หนังสือ", rs: "สั่งฟ้อง พลทหารอภิสิทธิ์ บุญทาวรรณ ส่งสำนวนไปอัยการศาลทหาร มทบ.27", nx: "ติดตามผลคดี", rf: "" },
+  { id: "n07", cid: "c3", tp: "30 วัน", dt: "2025-12-12", mt: "เว็บไซต์", rs: "สอบปากคำผู้เสียหาย พยาน ตรวจสอบที่เกิดเหตุ รวบรวมพยานหลักฐานครบถ้วน", nx: "เสนอสำนวนมีความเห็นทางคดี", rf: "" },
+  { id: "n08", cid: "c3", tp: "สรุปสำนวน", dt: "2026-01-08", mt: "หนังสือ", rs: "สั่งฟ้อง ด.ช.โชคศิริยศ หลาบคำ ส่งสำนวนไปอัยการจังหวัดคดีเยาวชนฯ ร้อยเอ็ด", nx: "ติดตามผลคดี", rf: "" },
+  { id: "n09", cid: "c4", tp: "30 วัน", dt: "2026-01-16", mt: "เว็บไซต์", rs: "สอบปากคำผู้เสียหายและพยานแล้ว รอผลชันสูตรบาดแผลจากแพทย์", nx: "ติดตามผลตรวจจากแพทย์", rf: "" },
+  { id: "n10", cid: "c4", tp: "60 วัน", dt: "2026-02-15", mt: "เว็บไซต์", rs: "ได้รับผลชันสูตรจากแพทย์แล้ว ผู้ต้องหามารับทราบข้อกล่าวหา", nx: "เร่งรัดจัดทำสำนวน", rf: "" },
+  { id: "n11", cid: "c4", tp: "สรุปสำนวน", dt: "2026-02-25", mt: "หนังสือ", rs: "สั่งฟ้อง นายพงษ์ศักดิ์ หรือสาม ค้อชากุล ส่งสำนวนไปอัยการฯ เมื่อ 25 ก.พ. 2569", nx: "ติดตามผลคดี", rf: "" },
+  { id: "n12", cid: "c5", tp: "30 วัน", dt: "2026-01-16", mt: "เว็บไซต์", rs: "สอบปากคำผู้เสียหายและพยานแล้ว อยู่ระหว่างตรวจสอบทรัพย์สินที่ถูกลัก", nx: "ออกหมายเรียกผู้ต้องหา", rf: "" },
+  { id: "n13", cid: "c5", tp: "60 วัน", dt: "2026-02-15", mt: "เว็บไซต์", rs: "ออกหมายเรียกผู้ต้องหา ผู้ต้องหามารับทราบข้อกล่าวหา อยู่ระหว่างจัดทำสำนวน", nx: "เร่งรัดจัดทำสำนวน", rf: "" },
+  { id: "n14", cid: "c5", tp: "สรุปสำนวน", dt: "2026-03-11", mt: "หนังสือ", rs: "สั่งฟ้อง นายวรวุฒิ อรวร ส่งสำนวนไปอัยการฯ เมื่อ 9 มี.ค. 2569", nx: "ติดตามผลคดี", rf: "" },
+  { id: "n15", cid: "c6", tp: "สรุปสำนวน", dt: "2026-01-30", mt: "หนังสือ", rs: "สั่งฟ้อง นาย ธงชัย แสงวุธ ส่งสำนวนไปอัยการจังหวัดร้อยเอ็ด ตามหนังสือที่ 00199(รอ).98/285", nx: "ติดตามผลคดี", rf: "00199(รอ).98/285" },
+  { id: "n16", cid: "c7", tp: "30 วัน", dt: "2026-03-25", mt: "เว็บไซต์", rs: "อยู่ระหว่างรวบรวมพยานหลักฐาน สอบปากคำพยานเพิ่มเติม", nx: "เสนอสำนวนมีความเห็นสั่งคดี", rf: "" },
+  { id: "n17", cid: "c7", tp: "สรุปสำนวน", dt: "2026-03-27", mt: "หนังสือ", rs: "สั่งฟ้อง น.ส.น้ำฝน ปัญญา ส่งสำนวนไปอัยการจังหวัดร้อยเอ็ด", nx: "ติดตามผลคดี", rf: "" }
+];
+
+function toBE(d) { if (!d) return ""; var x = new Date(d); var m = ["มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"]; return x.getDate() + " " + m[x.getMonth()] + " " + (x.getFullYear() + 543); }
+function toBS(d) { if (!d) return ""; var x = new Date(d); var m = ["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."]; return x.getDate() + " " + m[x.getMonth()] + " " + (x.getFullYear() + 543); }
+function scl(s) { if (s === "สั่งฟ้อง") return "bg-emerald-100 text-emerald-800"; if (s === "อยู่ระหว่างสอบสวน") return "bg-blue-100 text-blue-800"; return "bg-orange-100 text-orange-800"; }
+function mic(m) { return ({ "หนังสือ": "📄", "เว็บไซต์": "🌐", "PSC": "🏛️" })[m] || "📨"; }
+function dbt(a, b) { return Math.round((new Date(b) - new Date(a)) / 86400000); }
+
+function Header(props) {
+  return (
+    <header className="text-white shadow-xl" style={{ background: CLR.bg }}>
+      <div className="max-w-7xl mx-auto px-4 py-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={function() { props.setPage("search"); }}>
+            <img src={LOGO_B64} alt="Logo" className="w-14 h-14 rounded-full shadow-lg object-cover border-2" style={{ borderColor: CLR.gold }} />
+            <div>
+              <h1 className="text-base md:text-lg font-bold">{ST.name}</h1>
+              <p className="text-xs opacity-70">ระบบแจ้งความคืบหน้าคดีอาญา | ปีงบประมาณ {ST.fy}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            {!props.isAdmin && (
+              <button onClick={function() { props.setPage("dashboard"); }} className={"flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs border border-white/20 " + (props.page === "dashboard" ? "bg-white/20" : "hover:bg-white/10")}>
+                <BarChart3 size={14} />
+                <span className="hidden md:inline">สรุปข้อมูล</span>
+              </button>
+            )}
+            {props.isAdmin ? (
+              <button onClick={props.onLogout} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs border border-white/20 hover:bg-white/10">
+                <LogOut size={14} /><span className="hidden md:inline">ออกจากระบบ</span>
+              </button>
+            ) : (
+              <button onClick={props.onToggleAdmin} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs border border-white/20 hover:bg-white/10">
+                <LogIn size={14} /><span className="hidden md:inline">เจ้าหน้าที่</span>
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function Dashboard(props) {
+  var cases = props.cases; var notifs = props.notifs; var exp = props.exp; var setExp = props.setExp;
+  var tot = cases.length;
+  var wN = cases.filter(function(c) { return notifs.some(function(n) { return n.cid === c.id; }); }).length;
+  var onT = cases.filter(function(c) { var cn = notifs.filter(function(n) { return n.cid === c.id; }).sort(function(a,b) { return new Date(a.dt) - new Date(b.dt); }); if (!cn.length) return false; return dbt(c.rd, cn[0].dt) <= 35; }).length;
+  var invObj = {}; cases.forEach(function(c) { var k = c.ir + " " + c.inv; if (!invObj[k]) invObj[k] = { t: 0, n: 0, p: c.ip }; invObj[k].t++; if (notifs.some(function(n) { return n.cid === c.id; })) invObj[k].n++; });
+  var mtObj = {}; notifs.forEach(function(n) { mtObj[n.mt] = (mtObj[n.mt] || 0) + 1; });
+  var expCase = exp ? cases.find(function(x) { return x.id === exp; }) : null;
+  var expNotifs = exp ? notifs.filter(function(n) { return n.cid === exp; }).sort(function(a,b) { return new Date(a.dt) - new Date(b.dt); }) : [];
+
+  return (
+    <div className="min-h-screen" style={{ background: "#faf5ef" }}>
+    <div className="max-w-6xl mx-auto px-4 py-6 space-y-6">
+      <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="p-6 text-center" style={{ background: CLR.bg }}>
+          <h2 className="text-xl font-bold text-white mb-1">สรุปข้อมูลการแจ้งความคืบหน้าการสอบสวนคดีอาญา</h2>
+          <p className="text-white/60 text-sm">{ST.name} | {ST.full}</p>
+          <p className="text-white/40 text-xs mt-1">ปีงบประมาณ {ST.fy} | ข้อมูล ณ {toBE(new Date().toISOString().split("T")[0])}</p>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="rounded-xl p-4 text-center" style={{ background: "#fef2f2" }}><div className="text-3xl font-bold" style={{ color: CLR.pri }}>{tot}</div><div className="text-xs mt-1" style={{ color: CLR.priLt }}>คดีทั้งหมด</div></div>
+            <div className="bg-emerald-50 rounded-xl p-4 text-center"><div className="text-3xl font-bold text-emerald-700">{wN}</div><div className="text-xs text-emerald-600 mt-1">แจ้งความคืบหน้าแล้ว</div></div>
+            <div className="bg-purple-50 rounded-xl p-4 text-center"><div className="text-3xl font-bold text-purple-700">{notifs.length}</div><div className="text-xs text-purple-600 mt-1">จำนวนครั้งที่แจ้ง</div></div>
+            <div className="rounded-xl p-4 text-center" style={{ background: "rgba(196,154,42,0.1)" }}><div className="text-3xl font-bold" style={{ color: "#8b6914" }}>{onT}</div><div className="text-xs mt-1" style={{ color: "#a67c1a" }}>แจ้งตรงตามกำหนด</div></div>
+          </div>
+          <div className="mt-4"><div className="flex items-center justify-between text-xs text-gray-500 mb-1"><span>ความครบถ้วน</span><span>{wN}/{tot} คดี ({tot > 0 ? Math.round((wN/tot)*100) : 0}%)</span></div><div className="h-3 rounded-full bg-gray-200 overflow-hidden"><div className="h-full rounded-full transition-all" style={{ width: (tot > 0 ? (wN/tot)*100 : 0) + "%", background: CLR.pri }} /></div></div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="px-6 py-4 flex items-center justify-between" style={{ background: CLR.priDk }}>
+          <h3 className="text-white font-bold flex items-center gap-2"><FileText size={18} /> รายละเอียดรายคดี</h3>
+          <button onClick={function() { window.print(); }} className="text-white/60 hover:text-white text-xs flex items-center gap-1"><Printer size={14} /> พิมพ์</button>
+        </div>
+        <div className="overflow-x-auto"><table className="w-full text-sm"><thead className="bg-gray-50 text-gray-600"><tr>
+          <th className="px-3 py-3 text-left font-medium">#</th><th className="px-3 py-3 text-left font-medium">เลขคดี</th><th className="px-3 py-3 text-left font-medium">ฐานความผิด</th><th className="px-3 py-3 text-left font-medium">ผู้เสียหาย</th><th className="px-3 py-3 text-left font-medium">วันรับแจ้ง</th><th className="px-3 py-3 text-left font-medium">พงส.</th><th className="px-3 py-3 text-center font-medium">สถานะ</th><th className="px-3 py-3 text-center font-medium">30วัน</th><th className="px-3 py-3 text-center font-medium">60วัน</th><th className="px-3 py-3 text-center font-medium">สรุป</th><th className="px-3 py-3 text-center font-medium">ดู</th>
+        </tr></thead><tbody>
+          {cases.map(function(c, i) {
+            var cn = notifs.filter(function(n) { return n.cid === c.id; }); var h30 = cn.some(function(n) { return n.tp === "30 วัน"; }); var h60 = cn.some(function(n) { return n.tp === "60 วัน"; }); var hS = cn.some(function(n) { return n.tp === "สรุปสำนวน"; }); var sumN = cn.find(function(n) { return n.tp === "สรุปสำนวน"; }); var quick = hS && sumN && dbt(c.rd, sumN.dt) <= 30; var isE = exp === c.id;
+            return (
+              <tr key={c.id} className={"border-b border-gray-100 hover:bg-red-50/30 cursor-pointer " + (i % 2 ? "bg-gray-50/30" : "")} onClick={function() { setExp(isE ? null : c.id); }}>
+                <td className="px-3 py-3 text-gray-500">{i+1}</td><td className="px-3 py-3 font-semibold" style={{ color: CLR.pri }}>{c.cn}</td><td className="px-3 py-3 text-gray-700 max-w-[160px] truncate">{c.off}</td><td className="px-3 py-3 whitespace-nowrap">{c.vt} {c.vn}</td><td className="px-3 py-3 text-xs whitespace-nowrap">{toBS(c.rd)}</td><td className="px-3 py-3 text-xs whitespace-nowrap">{c.ir} {c.inv}</td><td className="px-3 py-3 text-center"><span className={"px-2 py-0.5 rounded-full text-xs font-medium " + scl(c.st)}>{c.st}</span></td>
+                <td className="px-3 py-3 text-center">{h30 ? "✅" : quick ? "—" : "❌"}</td><td className="px-3 py-3 text-center">{h60 ? "✅" : "—"}</td><td className="px-3 py-3 text-center">{hS ? "✅" : "⏳"}</td><td className="px-3 py-3 text-center">{isE ? <ChevronDown size={16} className="inline" style={{ color: CLR.pri }} /> : <ChevronRight size={16} className="inline" style={{ color: CLR.pri }} />}</td>
+              </tr>);
+          })}
+        </tbody></table></div>
+        {expCase && (<div className="px-6 py-4 border-t" style={{ background: "rgba(123,24,24,0.04)" }}><p className="text-xs text-gray-500 font-semibold mb-3">ไทม์ไลน์ — คดีที่ {expCase.cn}</p><div className="space-y-2">{expNotifs.map(function(n) { return (<div key={n.id} className="bg-white rounded-xl p-3 border border-gray-100 text-sm"><div className="flex items-center gap-2 mb-1 flex-wrap"><span className="font-semibold text-gray-700">{toBS(n.dt)}</span><span className="px-2 py-0.5 rounded-full text-xs text-white" style={{ background: CLR.pri }}>{n.tp}</span><span className="text-xs text-gray-500">{mic(n.mt)} {n.mt}</span>{n.rf && <span className="text-xs text-gray-400">เลขที่ {n.rf}</span>}</div><p className="text-gray-600"><span className="text-gray-400">ผล: </span>{n.rs}</p><p className="text-gray-500 text-xs"><span className="text-gray-400">ต่อไป: </span>{n.nx}</p></div>); })}</div></div>)}
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        <div className="bg-white rounded-2xl shadow-xl p-6"><h4 className="font-bold mb-4" style={{ color: CLR.pri }}>สถิติรายพนักงานสอบสวน</h4>{Object.entries(invObj).map(function(e) { var n=e[0],d=e[1]; return (<div key={n} className="flex items-center justify-between p-3 rounded-xl bg-gray-50 mb-2"><div><p className="text-sm font-medium text-gray-700">{n}</p><p className="text-xs text-gray-400">โทร {d.p}</p></div><div className="text-right"><span className={"px-2 py-0.5 rounded-full text-xs font-medium " + (d.n===d.t ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700")}>แจ้ง {d.n}/{d.t}</span><div className="mt-1 w-20 h-1.5 rounded-full bg-gray-200"><div className="h-full rounded-full" style={{ width: (d.n/d.t*100)+"%", background: CLR.pri }}/></div></div></div>); })}</div>
+        <div className="bg-white rounded-2xl shadow-xl p-6"><h4 className="font-bold mb-4" style={{ color: CLR.pri }}>ช่องทางการแจ้ง</h4>{Object.entries(mtObj).sort(function(a,b){return b[1]-a[1];}).map(function(e){var m=e[0],c=e[1];return(<div key={m} className="flex items-center justify-between p-3 rounded-xl bg-gray-50 mb-2"><span className="text-sm">{mic(m)} {m}</span><div className="flex items-center gap-2"><div className="w-24 h-2 rounded-full bg-gray-200"><div className="h-full rounded-full" style={{width:(c/notifs.length*100)+"%",background:CLR.pri}}/></div><span className="text-sm font-bold" style={{color:CLR.pri}}>{c}</span></div></div>);})}<div className="mt-4 p-3 rounded-xl bg-gray-50 border border-gray-200"><p className="text-xs text-gray-500">ข้อมูลอัปเดตโดย: {ST.cmdr} ({ST.cmdPos})</p><p className="text-xs text-gray-400">โทร {ST.cmdPh}</p></div></div>
+      </div>
+    </div></div>
+  );
+}
+
+function PubSearch(props) {
+  var cases=props.cases; var notifs=props.notifs; var q=props.q; var setQ=props.setQ; var res=props.res; var setRes=props.setRes; var done=props.done; var setDone=props.setDone;
+  function doSearch() { if(!q.trim())return; var ql=q.trim().toLowerCase(); setRes(cases.filter(function(c){return c.cn.toLowerCase().indexOf(ql)>=0||c.vn.toLowerCase().indexOf(ql)>=0||(c.vt+" "+c.vn).toLowerCase().indexOf(ql)>=0;})); setDone(true); }
+  return (
+    <div className="min-h-screen" style={{ background: "#faf5ef" }}>
+    <div className="max-w-3xl mx-auto px-4 pt-10 pb-6">
+      <div className="text-center mb-8">
+        <div className="mb-4"><img src={LOGO_B64} alt="Logo" className="w-20 h-20 mx-auto rounded-full shadow-lg border-2" style={{ borderColor: CLR.gold }} /></div>
+        <h2 className="text-2xl font-bold mb-2" style={{ color: CLR.pri }}>ตรวจสอบความคืบหน้าคดีของท่าน</h2>
+        <p className="text-sm" style={{ color: CLR.priLt }}>{ST.name}</p>
+        <p className="text-gray-500 text-sm mt-1">กรอกเลขคดี (เช่น 524/2568) หรือชื่อ-สกุลผู้เสียหาย</p>
+      </div>
+      <div className="bg-white rounded-2xl shadow-xl p-2 flex gap-2 border-2" style={{ borderColor: "#e8d5b0" }}>
+        <div className="flex-1 flex items-center gap-3 px-4"><Search size={20} className="text-gray-400 shrink-0" /><input type="text" value={q} onChange={function(e){setQ(e.target.value);}} onKeyDown={function(e){if(e.key==="Enter")doSearch();}} placeholder="เลขคดี หรือ ชื่อ-สกุลผู้เสียหาย" className="w-full py-3 text-base outline-none bg-transparent" /></div>
+        <button onClick={doSearch} className="px-6 py-3 rounded-xl text-white font-semibold shrink-0" style={{ background: CLR.btn }}>ค้นหา</button>
+      </div>
+    </div>
+    <div className="max-w-3xl mx-auto px-4 pb-12">
+      {done && res && res.length === 0 && (<div className="bg-white rounded-2xl shadow-lg p-8 text-center"><h3 className="text-lg font-semibold text-gray-700 mb-2">ไม่พบข้อมูลคดี</h3><p className="text-gray-500 text-sm">ติดต่อ {ST.name} โทร {ST.cmdPh}</p></div>)}
+      {res && res.map(function(c) { var cn = notifs.filter(function(n){return n.cid===c.id;}).sort(function(a,b){return new Date(b.dt)-new Date(a.dt);}); return (
+        <div key={c.id} className="bg-white rounded-2xl shadow-lg overflow-hidden mb-4 hover:shadow-xl cursor-pointer" onClick={function(){props.onSelect(c);}}>
+          <div className="p-5">
+            <div className="flex items-center gap-2 mb-2"><span className="text-xs px-2 py-0.5 rounded-full font-semibold text-white" style={{ background: CLR.pri }}>คดีที่ {c.cn}</span><span className={"text-xs px-2 py-0.5 rounded-full font-medium "+scl(c.st)}>{c.st}</span></div>
+            <h3 className="font-semibold text-gray-800 mb-2">{c.off}</h3>
+            <div className="grid grid-cols-2 gap-2 text-sm text-gray-600 mb-3"><div><span className="text-gray-400">ผู้เสียหาย: </span>{c.vt} {c.vn}</div><div><span className="text-gray-400">วันรับแจ้ง: </span>{toBS(c.rd)}</div></div>
+            {cn.length > 0 ? (<div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200"><div className="flex items-center gap-2 text-emerald-700 text-sm font-medium mb-1"><CheckCircle size={14}/>ล่าสุด ({toBS(cn[0].dt)})</div><p className="text-sm text-emerald-600">{cn[0].rs}</p></div>) : (<div className="p-3 rounded-xl bg-amber-50 border border-amber-200"><div className="flex items-center gap-2 text-amber-700 text-sm"><Clock size={14}/>อยู่ระหว่างดำเนินการ</div></div>)}
+          </div>
+          <div className="px-5 py-3 bg-gray-50 flex items-center justify-between text-sm"><span className="text-gray-500">พงส. {c.ir} {c.inv}</span><span className="font-medium" style={{ color: CLR.pri }}>ดูรายละเอียด →</span></div>
+        </div>); })}
+      {!done && (<div className="grid grid-cols-3 gap-4 mt-8">
+        <div className="bg-white rounded-xl p-5 shadow-md text-center"><div className="text-2xl mb-2">🔍</div><h3 className="font-semibold text-gray-700 mb-1">ค้นหาคดี</h3><p className="text-sm text-gray-500">กรอกเลขคดีหรือชื่อ-สกุล</p></div>
+        <div className="bg-white rounded-xl p-5 shadow-md text-center"><div className="text-2xl mb-2">📋</div><h3 className="font-semibold text-gray-700 mb-1">ดูความคืบหน้า</h3><p className="text-sm text-gray-500">ตรวจสอบผลดำเนินงาน</p></div>
+        <div className="bg-white rounded-xl p-5 shadow-md text-center"><div className="text-2xl mb-2">📞</div><h3 className="font-semibold text-gray-700 mb-1">ติดต่อสอบถาม</h3><p className="text-sm text-gray-500">โทร {ST.cmdPh}</p></div>
+      </div>)}
+    </div></div>
+  );
+}
+
+function Detail(props) {
+  var c=props.c; var notifs=props.notifs; var cn=notifs.filter(function(n){return n.cid===c.id;}).sort(function(a,b){return new Date(a.dt)-new Date(b.dt);});
+  return (
+    <div className="min-h-screen" style={{ background: "#faf5ef" }}>
+    <div className="max-w-3xl mx-auto px-4 py-6">
+      <button onClick={props.onBack} className="flex items-center gap-2 text-sm text-gray-500 hover:text-gray-700 mb-4"><ArrowLeft size={16}/>กลับ</button>
+      <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-6">
+        <div className="p-6" style={{ background: CLR.bg }}>
+          <div className="flex items-center gap-3 mb-3"><span className="px-3 py-1 rounded-full text-sm font-bold" style={{ background: "rgba(196,154,42,0.3)", color: CLR.goldLt }}>คดีที่ {c.cn}</span><span className="px-3 py-1 rounded-full text-sm bg-white/15 text-white">ปจว.ข้อ {c.pjw}</span></div>
+          <h2 className="text-xl font-bold text-white mb-1">{c.off}</h2><p className="text-white/60 text-sm">วันที่รับแจ้ง: {toBE(c.rd)}</p>
+        </div>
+        <div className="p-6 grid grid-cols-2 gap-4">
+          <div><span className="text-xs text-gray-400">ผู้เสียหาย</span><div className="text-sm font-medium">{c.vt} {c.vn}</div></div>
+          <div><span className="text-xs text-gray-400">ผู้ต้องหา</span><div className="text-sm font-medium">{c.sus}</div></div>
+          <div><span className="text-xs text-gray-400">สถานะ</span><div><span className={"px-2 py-0.5 rounded-full text-xs font-semibold "+scl(c.st)}>{c.st}</span></div></div>
+          <div><span className="text-xs text-gray-400">พงส.</span><div className="text-sm font-medium">{c.ir} {c.inv}</div></div>
+        </div>
+      </div>
+      <div className="bg-white rounded-2xl shadow-xl p-6">
+        <h3 className="text-lg font-bold text-gray-800 mb-6 flex items-center gap-2"><Clock size={20} style={{ color: CLR.pri }}/> ไทม์ไลน์ความคืบหน้า</h3>
+        {cn.map(function(n,i) { return (
+          <div key={n.id} className="relative pl-8 pb-6">
+            {i<cn.length-1 && <div className="absolute left-3 top-6 w-0.5 h-full bg-gray-200"/>}
+            <div className="absolute left-0 top-1 w-7 h-7 rounded-full flex items-center justify-center shadow-md" style={{ background: i===cn.length-1 ? "linear-gradient(135deg,"+CLR.gold+","+CLR.goldLt+")" : CLR.pri }}><CheckCircle size={14} className="text-white"/></div>
+            <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
+              <div className="flex items-center gap-2 mb-2 flex-wrap"><span className="text-sm font-semibold" style={{ color: CLR.pri }}>{toBS(n.dt)}</span><span className="text-xs px-2 py-0.5 rounded-full text-white" style={{ background: CLR.pri }}>{n.tp}</span><span className="text-xs text-gray-500">{mic(n.mt)} {n.mt}</span></div>
+              <p className="text-sm text-gray-700"><span className="text-gray-400 text-xs">ผลดำเนินการ: </span>{n.rs}</p>
+              <p className="text-sm text-gray-600"><span className="text-gray-400 text-xs">ดำเนินการต่อ: </span>{n.nx}</p>
+            </div>
+          </div>); })}
+      </div>
+      <div className="bg-white rounded-2xl shadow-lg p-6 mt-6"><h3 className="font-semibold text-gray-700 mb-4">ติดต่อสอบถาม</h3><div className="grid grid-cols-2 gap-4">
+        <div className="p-4 rounded-xl border" style={{ background: "rgba(123,24,24,0.04)", borderColor: "rgba(123,24,24,0.15)" }}><p className="text-xs mb-1" style={{ color: CLR.priLt }}>พนักงานสอบสวนเจ้าของสำนวน</p><p className="font-semibold" style={{ color: CLR.pri }}>{c.ir} {c.inv}</p><p className="text-sm" style={{ color: CLR.priLt }}>{c.ipo}</p><p className="text-sm mt-1" style={{ color: CLR.priLt }}><Phone size={12} className="inline mr-1"/>{c.ip}</p></div>
+        <div className="p-4 rounded-xl" style={{ background: "rgba(196,154,42,0.08)", border: "1px solid rgba(196,154,42,0.2)" }}><p className="text-xs mb-1" style={{ color: "#a67c1a" }}>ผู้บังคับบัญชา</p><p className="font-semibold" style={{ color: "#8b6914" }}>{ST.cmdr}</p><p className="text-sm" style={{ color: "#a67c1a" }}>{ST.cmdPos}</p><p className="text-sm mt-1" style={{ color: "#a67c1a" }}><Phone size={12} className="inline mr-1"/>{ST.cmdPh}</p></div>
+      </div></div>
+    </div></div>
+  );
+}
+
+function LoginPage(props) {
+  function doLogin() { if (props.u === "admin" && props.p === "0963542024") { props.onOk(); } else { props.setErr("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง"); } }
+  return (
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: CLR.bg }}>
+    <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-sm">
+      <div className="text-center mb-6">
+        <img src={LOGO_B64} alt="Logo" className="w-20 h-20 mx-auto rounded-full shadow-lg border-2 mb-3" style={{ borderColor: CLR.gold }} />
+        <h2 className="text-xl font-bold" style={{ color: CLR.pri }}>เข้าสู่ระบบเจ้าหน้าที่</h2>
+        <p className="text-xs text-gray-400 mt-1">{ST.name}</p>
+      </div>
+      {props.err && <div className="mb-4 p-3 rounded-lg bg-red-50 text-red-600 text-sm text-center">{props.err}</div>}
+      <div className="space-y-4">
+        <div><label className="text-sm text-gray-600 mb-1 block">ชื่อผู้ใช้</label><input type="text" value={props.u} onChange={function(e){props.setU(e.target.value);props.setErr("");}} className="w-full px-3 py-2 rounded-xl border border-gray-200 outline-none text-sm"/></div>
+        <div><label className="text-sm text-gray-600 mb-1 block">รหัสผ่าน</label><input type="password" value={props.p} onChange={function(e){props.setP(e.target.value);props.setErr("");}} onKeyDown={function(e){if(e.key==="Enter")doLogin();}} className="w-full px-3 py-2 rounded-xl border border-gray-200 outline-none text-sm"/></div>
+        <button onClick={doLogin} className="w-full py-3 rounded-xl text-white font-semibold" style={{ background: CLR.btn }}>เข้าสู่ระบบ</button>
+        <button onClick={props.onCancel} className="w-full py-2 text-sm text-gray-500">← กลับหน้าประชาชน</button>
+      </div>
+    </div></div>
+  );
+}
+
+function AdminPanel(props) {
+  var cases=props.cases; var notifs=props.notifs; var setNotifs=props.setNotifs; var tab=props.tab; var setTab=props.setTab;
+  function saveNotif() { if(!props.nfCid||!props.nfRs){alert("กรุณาเลือกคดีและกรอกผลดำเนินการ");return;} setNotifs(notifs.concat([{id:"n"+Date.now(),cid:props.nfCid,tp:props.nfTp,dt:props.nfDt,mt:props.nfMt,rs:props.nfRs,nx:props.nfNx,rf:""}])); props.setShowNf(false);props.setNfCid("");props.setNfRs("");props.setNfNx(""); }
+  var tabs=[{id:"dash",l:"📊 สรุปข้อมูล"},{id:"cases",l:"📋 รายการคดี"},{id:"notifs",l:"🔔 บันทึกความคืบหน้า"}];
+  return (
+    <div className="min-h-screen" style={{ background: "#faf5ef" }}><div className="max-w-6xl mx-auto px-4 py-6">
+      <div className="flex gap-1 mb-6 bg-white rounded-xl p-1 shadow-md overflow-x-auto">{tabs.map(function(t){return(<button key={t.id} onClick={function(){setTab(t.id);}} className={"flex-1 py-3 rounded-lg text-sm font-medium whitespace-nowrap px-3 "+(tab===t.id?"text-white shadow-md":"text-gray-500 hover:bg-gray-50")} style={tab===t.id?{background:CLR.btn}:{}}>{t.l}</button>);})}</div>
+      {tab==="dash" && <Dashboard cases={cases} notifs={notifs} exp={props.dashExp} setExp={props.setDashExp}/>}
+      {tab==="cases" && (<div className="bg-white rounded-2xl shadow-lg overflow-x-auto"><table className="w-full text-sm"><thead><tr style={{background:CLR.priDk}} className="text-white text-left"><th className="px-3 py-3">เลขคดี</th><th className="px-3 py-3">ฐานความผิด</th><th className="px-3 py-3">ผู้เสียหาย</th><th className="px-3 py-3">พงส.</th><th className="px-3 py-3">สถานะ</th><th className="px-3 py-3 text-center">แจ้งแล้ว</th><th className="px-3 py-3 text-center">แจ้ง</th></tr></thead><tbody>{cases.map(function(c,i){var nc=notifs.filter(function(n){return n.cid===c.id;}).length;return(<tr key={c.id} className={"border-b border-gray-100 "+(i%2?"bg-gray-50/30":"")}><td className="px-3 py-3 font-semibold" style={{color:CLR.pri}}>{c.cn}</td><td className="px-3 py-3 text-gray-700 max-w-[150px] truncate">{c.off}</td><td className="px-3 py-3 whitespace-nowrap">{c.vt} {c.vn}</td><td className="px-3 py-3 text-xs whitespace-nowrap">{c.ir} {c.inv}</td><td className="px-3 py-3"><span className={"px-2 py-0.5 rounded-full text-xs font-medium "+scl(c.st)}>{c.st}</span></td><td className="px-3 py-3 text-center"><span className={"px-2 py-0.5 rounded-full text-xs font-medium "+(nc>0?"bg-emerald-100 text-emerald-700":"bg-red-100 text-red-700")}>{nc>0?nc+" ครั้ง":"ยังไม่แจ้ง"}</span></td><td className="px-3 py-3 text-center"><button onClick={function(){props.setNfCid(c.id);props.setShowNf(true);setTab("notifs");}} className="p-1.5 rounded-lg hover:bg-red-50" style={{color:CLR.pri}}><Bell size={14}/></button></td></tr>);})}</tbody></table></div>)}
+      {tab==="notifs" && (<div>
+        <div className="flex items-center justify-between mb-4"><h3 className="text-lg font-bold" style={{color:CLR.pri}}>รายการแจ้งความคืบหน้า ({notifs.length})</h3><button onClick={function(){props.setShowNf(true);}} className="flex items-center gap-2 px-4 py-2 rounded-xl text-white text-sm font-medium" style={{background:CLR.btn}}><Plus size={16}/>เพิ่มการแจ้ง</button></div>
+        {props.showNf && (<div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border-l-4" style={{borderLeftColor:CLR.gold}}><h4 className="font-semibold mb-4" style={{color:CLR.pri}}>บันทึกการแจ้งความคืบหน้า</h4><div className="space-y-4">
+          <div><label className="text-sm text-gray-600 mb-1 block">เลือกคดี *</label><select value={props.nfCid} onChange={function(e){props.setNfCid(e.target.value);}} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white"><option value="">-- เลือกคดี --</option>{cases.map(function(c){return <option key={c.id} value={c.id}>{c.cn} — {c.off} ({c.vt} {c.vn})</option>;})}</select></div>
+          <div className="grid grid-cols-3 gap-4">
+            <div><label className="text-sm text-gray-600 mb-1 block">ประเภท</label><select value={props.nfTp} onChange={function(e){props.setNfTp(e.target.value);}} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white"><option value="30 วัน">30 วัน</option><option value="60 วัน">60 วัน</option><option value="สรุปสำนวน">สรุปสำนวน</option></select></div>
+            <div><label className="text-sm text-gray-600 mb-1 block">วันที่แจ้ง</label><input type="date" value={props.nfDt} onChange={function(e){props.setNfDt(e.target.value);}} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm"/></div>
+            <div><label className="text-sm text-gray-600 mb-1 block">ช่องทาง</label><select value={props.nfMt} onChange={function(e){props.setNfMt(e.target.value);}} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm bg-white"><option value="เว็บไซต์">เว็บไซต์</option><option value="หนังสือ">หนังสือ</option><option value="ไปรษณีย์">ไปรษณีย์</option><option value="PSC">PSC</option><option value="อิเล็กทรอนิกส์">อิเล็กทรอนิกส์</option></select></div>
+          </div>
+          <div><label className="text-sm text-gray-600 mb-1 block">ผลดำเนินการ *</label><textarea value={props.nfRs} onChange={function(e){props.setNfRs(e.target.value);}} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm resize-none" rows={3} placeholder="เช่น สอบสวนเสร็จ สั่งฟ้อง..."/></div>
+          <div><label className="text-sm text-gray-600 mb-1 block">ดำเนินการต่อ</label><input type="text" value={props.nfNx} onChange={function(e){props.setNfNx(e.target.value);}} className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm" placeholder="เช่น ติดตามผลคดี"/></div>
+          <div className="flex justify-end gap-3"><button onClick={function(){props.setShowNf(false);}} className="px-4 py-2 rounded-xl border border-gray-200 text-gray-600 text-sm">ยกเลิก</button><button onClick={saveNotif} className="px-5 py-2 rounded-xl text-white text-sm font-medium" style={{background:CLR.btn}}><Save size={14} className="inline mr-1"/>บันทึก</button></div>
+        </div></div>)}
+        <div className="bg-white rounded-2xl shadow-lg overflow-x-auto"><table className="w-full text-sm"><thead><tr style={{background:CLR.priDk}} className="text-white text-left"><th className="px-3 py-3">คดี</th><th className="px-3 py-3">ผู้เสียหาย</th><th className="px-3 py-3">ประเภท</th><th className="px-3 py-3">วันที่แจ้ง</th><th className="px-3 py-3">ช่องทาง</th><th className="px-3 py-3">ผลดำเนินการ</th></tr></thead><tbody>{notifs.slice().sort(function(a,b){return new Date(b.dt)-new Date(a.dt);}).map(function(n,i){var c=cases.find(function(x){return x.id===n.cid;});if(!c)return null;return(<tr key={n.id} className={"border-b border-gray-100 "+(i%2?"bg-gray-50/30":"")}><td className="px-3 py-3 font-semibold" style={{color:CLR.pri}}>{c.cn}</td><td className="px-3 py-3 whitespace-nowrap">{c.vt} {c.vn}</td><td className="px-3 py-3"><span className="px-2 py-0.5 rounded-full text-xs text-white" style={{background:CLR.pri}}>{n.tp}</span></td><td className="px-3 py-3 whitespace-nowrap">{toBS(n.dt)}</td><td className="px-3 py-3">{mic(n.mt)} {n.mt}</td><td className="px-3 py-3 text-gray-700 max-w-[200px] truncate">{n.rs}</td></tr>);})}</tbody></table></div>
+      </div>)}
+    </div></div>
+  );
+}
+
+function Footer() {
+  return (<footer className="text-center py-4 text-xs text-gray-400" style={{ background: "#f5efe5" }}>
+    <p>{ST.name} | {ST.full}</p>
+    <p>ระบบแจ้งความคืบหน้าการสอบสวนคดีอาญา | ตามคำสั่ง ตร. ที่ 419/2556</p>
+  </footer>);
+}
+
+function App() {
+  var cs = useState(initCases); var cases = cs[0]; var setCases = cs[1];
+  var ns = useState(initNotifs); var notifs = ns[0]; var setNotifs = ns[1];
+  var as = useState(false); var isAdm = as[0]; var setIsAdm = as[1];
+  var ls = useState(false); var showLog = ls[0]; var setShowLog = ls[1];
+  var ps = useState("search"); var page = ps[0]; var setPage = ps[1];
+  var ss = useState(null); var selCase = ss[0]; var setSelCase = ss[1];
+  var qs = useState(""); var q = qs[0]; var setQ = qs[1];
+  var rs = useState(null); var res = rs[0]; var setRes = rs[1];
+  var ds = useState(false); var done = ds[0]; var setDone = ds[1];
+  var us = useState(""); var u = us[0]; var setU = us[1];
+  var pp = useState(""); var p = pp[0]; var setP = pp[1];
+  var es = useState(""); var err = es[0]; var setErr = es[1];
+  var ts = useState("dash"); var tab = ts[0]; var setTab = ts[1];
+  var nc = useState(""); var nfCid = nc[0]; var setNfCid = nc[1];
+  var nt = useState("30 วัน"); var nfTp = nt[0]; var setNfTp = nt[1];
+  var nd = useState(new Date().toISOString().split("T")[0]); var nfDt = nd[0]; var setNfDt = nd[1];
+  var nm = useState("เว็บไซต์"); var nfMt = nm[0]; var setNfMt = nm[1];
+  var nr = useState(""); var nfRs = nr[0]; var setNfRs = nr[1];
+  var nn = useState(""); var nfNx = nn[0]; var setNfNx = nn[1];
+  var sf = useState(false); var showNf = sf[0]; var setShowNf = sf[1];
+  var de = useState(null); var dashExp = de[0]; var setDashExp = de[1];
+
+  if (showLog && !isAdm) { return (<div style={{fontFamily:"Sarabun,Noto Sans Thai,sans-serif"}}><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet"/><LoginPage onOk={function(){setIsAdm(true);setShowLog(false);}} onCancel={function(){setShowLog(false);}} u={u} setU={setU} p={p} setP={setP} err={err} setErr={setErr}/></div>); }
+
+  var content = null;
+  if (isAdm) { content = <AdminPanel cases={cases} setCases={setCases} notifs={notifs} setNotifs={setNotifs} tab={tab} setTab={setTab} nfCid={nfCid} setNfCid={setNfCid} nfTp={nfTp} setNfTp={setNfTp} nfDt={nfDt} setNfDt={setNfDt} nfMt={nfMt} setNfMt={setNfMt} nfRs={nfRs} setNfRs={setNfRs} nfNx={nfNx} setNfNx={setNfNx} showNf={showNf} setShowNf={setShowNf} dashExp={dashExp} setDashExp={setDashExp}/>; }
+  else if (page === "dashboard") { content = <Dashboard cases={cases} notifs={notifs} exp={dashExp} setExp={setDashExp}/>; }
+  else if (page === "detail" && selCase) { content = <Detail c={selCase} notifs={notifs} onBack={function(){setPage("search");}}/>; }
+  else { content = <PubSearch cases={cases} notifs={notifs} onSelect={function(c){setSelCase(c);setPage("detail");}} q={q} setQ={setQ} res={res} setRes={setRes} done={done} setDone={setDone}/>; }
+
+  return (<div style={{fontFamily:"Sarabun,Noto Sans Thai,sans-serif"}}><link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet"/><Header isAdmin={isAdm} page={page} setPage={setPage} onToggleAdmin={function(){setShowLog(true);}} onLogout={function(){setIsAdm(false);}}/>{content}<Footer/></div>);
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+</script>
+</body>
+</html>
